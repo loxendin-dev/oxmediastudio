@@ -24,12 +24,11 @@
 .hero{padding:2.5rem 2.5rem 7rem;background:#e8e8e8;text-align:center;display:flex;flex-direction:column;align-items:center;}
 .hero-pre{font-size:0.85rem;font-weight:500;color:#888;margin-bottom:1.5rem;}
 .hero h1{font-size:clamp(2.8rem,7.5vw,6.5rem);font-weight:600;line-height:1.0;color:#0d0d0d;letter-spacing:-0.03em;margin-bottom:2.5rem;max-width:900px;}
-.hero-sub{font-size:1rem;color:#555;line-height:1.85;max-width:520px;margin-bottom:3rem;}
+.hero-sub{font-size:1rem;color:#555;line-height:1.85;max-width:560px;margin-bottom:3rem;}
 .hero-stats{display:flex;gap:4rem;flex-wrap:wrap;justify-content:center;padding-top:2.5rem;border-top:1px solid #ccc;width:100%;max-width:760px;}
 .hstat{text-align:center;}
 .hstat .l{font-size:0.78rem;color:#888;margin-top:0.4rem;}
 
-/* SLOT — clipping window is exactly one digit tall */
 .slot-wrap{display:inline-flex;align-items:center;gap:0;}
 .slot-window{overflow:hidden;height:2.5rem;display:inline-block;vertical-align:middle;}
 .slot-inner{display:flex;flex-direction:column;will-change:transform;}
@@ -136,11 +135,9 @@
 <section class="hero">
   <div class="hero-pre fade-up visible">You Don't Need To Increase Your Ad Budget</div>
   <h1 class="fade-up visible delay-1">Stop Paying For Visitors<br>Who Never Become<br>Customers.</h1>
-  <p class="hero-sub fade-up visible delay-2">You're paying for every click. But 50–80% of paid ad traffic never converts, because visitors land on a page built for everyone, not for them. Ox Media stops that leak with a single conversion layer page.</p>
+  <p class="hero-sub fade-up visible delay-2">You're paying for every click. But most businesses lose 50–80% of their ad budget to people who never convert to customers. At OxMedia Studio, we stop the ad leakage that costs businesses thousands every month.</p>
 
   <div class="hero-stats fade-up visible delay-3">
-
-    <!-- 3–5x -->
     <div class="hstat">
       <div class="slot-wrap">
         <div class="slot-window" id="win1"><div class="slot-inner" id="inner1"></div></div>
@@ -150,8 +147,6 @@
       </div>
       <div class="l">Your revenue with one change</div>
     </div>
-
-    <!-- $0 -->
     <div class="hstat">
       <div class="slot-wrap">
         <span class="slot-static">$</span>
@@ -159,15 +154,12 @@
       </div>
       <div class="l">Extra ad spend needed</div>
     </div>
-
-    <!-- 1 -->
     <div class="hstat">
       <div class="slot-wrap">
         <div class="slot-window" id="win4"><div class="slot-inner" id="inner4"></div></div>
       </div>
       <div class="l">Adjustment</div>
     </div>
-
   </div>
 </section>
 
@@ -290,25 +282,18 @@
 </div>
 
 <script>
-// Scroll animations
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.12 });
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-// SLOT MACHINE — scrolls UP, final digit stays visible at bottom of window
 function spinReel(innerId, finalChar, turns, duration, delayMs) {
   const inner = document.getElementById(innerId);
-  const digitH = 40; // px — matches 2.5rem at 16px base
-
-  // Build strip: random digits on top, final at bottom
+  const digitH = 40;
   const chars = [];
   const pool = '9876543210';
-  for (let i = 0; i < turns; i++) {
-    chars.push(pool[Math.floor(Math.random() * pool.length)]);
-  }
-  chars.push(finalChar); // final always last
-
+  for (let i = 0; i < turns; i++) chars.push(pool[Math.floor(Math.random() * pool.length)]);
+  chars.push(finalChar);
   inner.innerHTML = '';
   chars.forEach(c => {
     const el = document.createElement('span');
@@ -316,27 +301,18 @@ function spinReel(innerId, finalChar, turns, duration, delayMs) {
     el.textContent = c;
     inner.appendChild(el);
   });
-
-  const totalH = chars.length * digitH;
-  // Start: show first digit (translateY = 0)
-  // End: show last digit = translateY of -(totalH - digitH)
-  const endY = -(totalH - digitH);
-
+  const endY = -(chars.length - 1) * digitH;
   inner.style.transform = 'translateY(0px)';
   inner.style.transition = 'none';
-
   setTimeout(() => {
-    // Force reflow
     inner.getBoundingClientRect();
     inner.style.transition = `transform ${duration}ms cubic-bezier(0.22, 0.6, 0.2, 1)`;
     inner.style.transform = `translateY(${endY}px)`;
   }, delayMs);
 }
 
-// Trigger when stats section is in view
 const statsEl = document.querySelector('.hero-stats');
 let fired = false;
-
 const statsObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting && !fired) {
@@ -349,6 +325,5 @@ const statsObserver = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.4 });
-
 if (statsEl) statsObserver.observe(statsEl);
 </script>
