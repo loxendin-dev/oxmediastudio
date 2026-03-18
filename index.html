@@ -4,10 +4,10 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 .s{background:#e8e8e8;color:#0d0d0d;font-family:'Figtree',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
 
-.nav{display:flex;justify-content:center;align-items:center;padding:1.4rem 2.5rem;background:#e8e8e8;position:relative;}
-.nav-brand{font-size:1rem;font-weight:700;color:#0d0d0d;letter-spacing:-0.01em;text-transform:uppercase;position:absolute;left:2.5rem;}
+.nav{display:flex;justify-content:center;align-items:center;padding:1.4rem 2.5rem;background:#e8e8e8;position:sticky;top:0;z-index:100;}
+.nav-brand{font-size:1rem;font-weight:700;color:#0d0d0d;letter-spacing:-0.01em;text-transform:uppercase;position:absolute;left:2.5rem;cursor:pointer;}
 .nav-links{display:flex;gap:2.5rem;list-style:none;}
-.nav-links a{color:#0d0d0d;text-decoration:none;font-size:0.92rem;font-weight:500;transition:opacity 0.2s;}
+.nav-links a{color:#0d0d0d;text-decoration:none;font-size:0.92rem;font-weight:500;transition:opacity 0.2s;cursor:pointer;}
 .nav-links a:hover{opacity:0.45;}
 
 .hero{padding:6rem 2.5rem 7rem;background:#e8e8e8;text-align:center;display:flex;flex-direction:column;align-items:center;}
@@ -73,39 +73,29 @@
 .about-big{font-size:9rem;font-weight:600;color:#d4d4d4;line-height:1;letter-spacing:-0.05em;margin-bottom:2rem;}
 .about-loc{font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#aaa;margin-top:1.5rem;}
 
-.contact{background:#0d0d0d;padding:3.5rem 2.5rem;}
-.contact-title{font-size:clamp(1.8rem,4vw,3rem);font-weight:600;line-height:1.1;letter-spacing:-0.02em;color:#fff;margin-bottom:0.75rem;}
-.contact-sub{font-size:0.95rem;color:#fff;max-width:480px;line-height:1.75;margin-bottom:2rem;}
-.contact-inner{display:grid;grid-template-columns:1fr 1.6fr;gap:3rem;align-items:start;}
-.contact-left .cdetail{display:flex;align-items:center;gap:0.75rem;font-size:0.88rem;color:#fff;margin-bottom:0.75rem;}
-.contact-left .cdetail svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:1.5;flex-shrink:0;}
-.motto{font-size:1.1rem;font-weight:600;color:#fff;margin-top:2rem;letter-spacing:-0.02em;line-height:1.3;}
-.sig{font-size:0.75rem;color:#888;margin-top:0.4rem;}
-.cf{display:flex;flex-direction:column;gap:0.6rem;}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;}
-.field label{display:block;font-size:0.67rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#888;margin-bottom:0.3rem;}
-.field input,.field textarea,.field select{width:100%;background:#111;border:1px solid #2a2a2a;color:#fff;padding:0.65rem 0.9rem;font-family:'Figtree',sans-serif;font-size:0.88rem;border-radius:8px;outline:none;transition:border-color 0.2s;}
-.field input::placeholder,.field textarea::placeholder{color:#555;}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:#555;}
-.field textarea{resize:vertical;min-height:80px;}
-.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-color:#111;}
-.btn-white{background:#fff;color:#0d0d0d;border:none;padding:0.8rem 1.75rem;font-family:'Figtree',sans-serif;font-size:0.88rem;font-weight:600;cursor:pointer;border-radius:100px;transition:opacity 0.2s;white-space:nowrap;align-self:flex-start;margin-top:0.25rem;}
-.btn-white:hover{opacity:0.85;}
+.contact{background:#0d0d0d;padding:6rem 2.5rem;text-align:center;display:flex;flex-direction:column;align-items:center;}
+.contact-title{font-size:clamp(2.2rem,5vw,4.5rem);font-weight:600;line-height:1.05;letter-spacing:-0.03em;color:#fff;margin-bottom:1.25rem;max-width:800px;}
+.contact-sub{font-size:1rem;color:#fff;max-width:480px;line-height:1.75;margin-bottom:3rem;}
+.contact-details{display:flex;flex-direction:column;align-items:center;gap:1rem;margin-bottom:3rem;}
+.cdetail{display:flex;align-items:center;gap:0.75rem;font-size:1rem;color:#fff;}
+.cdetail svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:1.5;flex-shrink:0;}
+.motto{font-size:1.2rem;font-weight:600;color:#fff;letter-spacing:-0.02em;line-height:1.3;padding-top:2.5rem;border-top:1px solid #2a2a2a;}
+.sig{font-size:0.78rem;color:#888;margin-top:0.5rem;}
 
 .footer{background:#0a0a0a;padding:1.75rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:1px solid #1a1a1a;}
 .footer-brand{font-size:0.9rem;font-weight:700;color:#fff;text-transform:uppercase;}
 .footer-copy{font-size:0.75rem;color:#fff;}
 </style>
 
-<div class="s">
+<div class="s" id="top">
 
 <nav class="nav">
-  <div class="nav-brand">Ox Media Studio</div>
+  <div class="nav-brand" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})">Ox Media Studio</div>
   <ul class="nav-links">
-    <li><a href="#">The Method</a></li>
-    <li><a href="#">Who We Help</a></li>
-    <li><a href="#">Results</a></li>
-    <li><a href="#">Contact</a></li>
+    <li><a onclick="document.getElementById('method').scrollIntoView({behavior:'smooth'})">The Method</a></li>
+    <li><a onclick="document.getElementById('who-we-help').scrollIntoView({behavior:'smooth'})">Who We Help</a></li>
+    <li><a onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">Results</a></li>
+    <li><a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact</a></li>
   </ul>
 </nav>
 
@@ -134,7 +124,7 @@
   </div>
 </section>
 
-<section class="gray">
+<section class="gray" id="method">
   <div class="gray-title">The Conversion<br>Layer Method™</div>
   <p class="gray-sub">A purpose-built page that sits between your ad and your website. It prepares visitors emotionally, reinforces your ad's promise, and drives one clear action — no distractions, no menus, no exits.</p>
   <div class="steps">
@@ -145,7 +135,7 @@
   </div>
 </section>
 
-<section class="wht">
+<section class="wht" id="who-we-help">
   <div class="wht-title">Businesses Already<br>Running Ads.</div>
   <div class="niche-grid">
     <div class="niche-item"><div class="ni-name">Roofing</div><div class="ni-spend">$3k–$15k / mo spend</div><div class="ni-leak">~$1,800–$9,000 / mo leaked</div></div>
@@ -163,7 +153,7 @@
   </div>
 </section>
 
-<section class="roi">
+<section class="roi" id="results">
   <div class="roi-title">Make Your Ads<br>Work Harder<br>For You.</div>
   <p class="roi-sub">You don't need more ad budget. You need to convert more of the traffic you're already paying for.</p>
   <div class="roi-inner">
@@ -203,46 +193,25 @@
   </div>
 </section>
 
-<section class="contact">
-  <div class="contact-title">Every Click You Pay For<br>Should Pay You Back.</div>
+<section class="contact" id="contact">
+  <div class="contact-title">Every Click You Pay For<br>Should Pay You Back.<br>Contact Us.</div>
   <p class="contact-sub">You're already spending on ads. The problem isn't the traffic, it's where it lands. Tell us about your funnel and we'll show you exactly where it's costing you.</p>
-  <div class="contact-inner">
-    <div class="contact-left">
-      <div class="cdetail"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Lonnie@oxmediastudio.com</div>
-      <div class="cdetail"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> oxmediastudio.com</div>
-      <div class="motto">"Stop paying for visitors<br>who never become customers."</div>
-      <div class="sig">— Lonnie Oxendine, Ox Media Studio · Tampa, FL</div>
+  <div class="contact-details">
+    <div class="cdetail">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Lonnie@oxmediastudio.com
     </div>
-    <div class="cf">
-      <div class="frow">
-        <div class="field"><label>Name</label><input type="text" placeholder="Your name"/></div>
-        <div class="field"><label>Email</label><input type="email" placeholder="you@email.com"/></div>
-      </div>
-      <div class="field"><label>Business Name</label><input type="text" placeholder="Your company"/></div>
-      <div class="field"><label>Industry</label>
-        <select>
-          <option value="">Select your niche...</option>
-          <option>Roofing</option><option>Med Spa / Aesthetics</option><option>HVAC</option>
-          <option>Personal Injury Law</option><option>Plastic Surgery</option>
-          <option>Home Remodeling</option><option>Pool Builder</option>
-          <option>Cosmetic Dentistry</option><option>Hair Transplant</option>
-          <option>Solar</option><option>Landscaping</option>
-          <option>Weight Loss Clinic</option><option>Chiropractor</option>
-          <option>Real Estate</option><option>Other</option>
-        </select>
-      </div>
-      <div class="field"><label>Monthly Ad Spend</label>
-        <select>
-          <option value="">Select a range...</option>
-          <option>Under $1,000/mo</option><option>$1,000–$3,000/mo</option>
-          <option>$3,000–$7,500/mo</option><option>$7,500–$15,000/mo</option>
-          <option>$15,000+/mo</option>
-        </select>
-      </div>
-      <div class="field"><label>About Your Funnel</label><textarea placeholder="What ads are you running? Where are you sending traffic? What's not converting?"></textarea></div>
-      <button class="btn-white">→ Request a Free Audit</button>
+    <div class="cdetail">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6 6l.93-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+      (813) 485-5304
+    </div>
+    <div class="cdetail">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      oxmediastudio.com
     </div>
   </div>
+  <div class="motto">"Stop paying for visitors who never become customers."</div>
+  <div class="sig">OxMedia Studio</div>
 </section>
 
 <footer class="footer">
