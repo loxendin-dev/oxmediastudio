@@ -1,0 +1,253 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+.s{background:#e8e8e8;color:#0d0d0d;font-family:'Figtree',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
+
+.nav{display:flex;justify-content:center;align-items:center;padding:1.4rem 2.5rem;background:#e8e8e8;position:relative;}
+.nav-brand{font-size:1rem;font-weight:700;color:#0d0d0d;letter-spacing:-0.01em;text-transform:uppercase;position:absolute;left:2.5rem;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{color:#0d0d0d;text-decoration:none;font-size:0.92rem;font-weight:500;transition:opacity 0.2s;}
+.nav-links a:hover{opacity:0.45;}
+
+.hero{padding:6rem 2.5rem 7rem;background:#e8e8e8;text-align:center;display:flex;flex-direction:column;align-items:center;}
+.hero-pre{font-size:0.85rem;font-weight:500;color:#888;margin-bottom:2rem;}
+.hero h1{font-size:clamp(2.8rem,7.5vw,6.5rem);font-weight:600;line-height:1.0;color:#0d0d0d;letter-spacing:-0.03em;margin-bottom:2.5rem;max-width:900px;}
+.hero-sub{font-size:1rem;color:#555;line-height:1.85;max-width:520px;margin-bottom:3rem;}
+.hero-stats{display:flex;gap:4rem;flex-wrap:wrap;justify-content:center;padding-top:2.5rem;border-top:1px solid #ccc;width:100%;max-width:700px;}
+.hstat .n{font-size:2rem;font-weight:600;color:#0d0d0d;line-height:1;letter-spacing:-0.03em;}
+.hstat .l{font-size:0.78rem;color:#888;margin-top:0.2rem;}
+
+.blk{background:#0d0d0d;padding:6rem 2.5rem;}
+.blk-title{font-size:clamp(2.8rem,6.5vw,6rem);font-weight:600;line-height:1.0;letter-spacing:-0.03em;color:#fff;margin-bottom:4rem;}
+.blk-stat{display:flex;align-items:center;gap:3rem;margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid #2a2a2a;flex-wrap:wrap;}
+.blk-stat .big{font-size:7rem;font-weight:600;color:#fff;line-height:1;letter-spacing:-0.04em;flex-shrink:0;}
+.blk-stat .big-desc{font-size:1rem;color:#fff;line-height:1.85;max-width:420px;}
+.blk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#2a2a2a;}
+.blk-item{background:#0d0d0d;padding:2.5rem;border-top:1px solid #2a2a2a;}
+.blk-item .pn{font-size:0.72rem;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.25rem;}
+.blk-item h3{font-size:1rem;font-weight:600;color:#fff;margin-bottom:0.6rem;line-height:1.3;}
+.blk-item p{font-size:0.88rem;color:#fff;line-height:1.7;}
+
+.gray{background:#e8e8e8;padding:6rem 2.5rem;}
+.gray-title{font-size:clamp(2.8rem,6.5vw,6rem);font-weight:600;line-height:1.0;letter-spacing:-0.03em;color:#0d0d0d;margin-bottom:1rem;}
+.gray-sub{font-size:1rem;color:#555;max-width:560px;line-height:1.85;margin-bottom:4rem;}
+.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#ccc;border-top:1px solid #ccc;border-bottom:1px solid #ccc;}
+.step{background:#e8e8e8;padding:2.5rem;}
+.step .sn{font-size:0.72rem;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.25rem;}
+.step h4{font-size:1rem;font-weight:600;color:#0d0d0d;margin-bottom:0.6rem;line-height:1.3;}
+.step p{font-size:0.88rem;color:#555;line-height:1.7;}
+
+.wht{background:#f0f0ee;padding:6rem 2.5rem;}
+.wht-title{font-size:clamp(2.8rem,6.5vw,6rem);font-weight:600;line-height:1.0;letter-spacing:-0.03em;color:#0d0d0d;margin-bottom:4rem;}
+.niche-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#ddd;border:1px solid #ddd;}
+.niche-item{background:#f0f0ee;padding:1.5rem;transition:background 0.15s;}
+.niche-item:hover{background:#e4e4e2;}
+.niche-item .ni-name{font-size:0.95rem;font-weight:600;color:#0d0d0d;margin-bottom:0.4rem;}
+.niche-item .ni-spend{font-size:0.7rem;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.2rem;}
+.niche-item .ni-leak{font-size:0.7rem;font-weight:600;color:#c0392b;text-transform:uppercase;letter-spacing:0.06em;}
+
+.roi{background:#0d0d0d;padding:6rem 2.5rem;}
+.roi-title{font-size:clamp(2.8rem,6.5vw,6rem);font-weight:600;line-height:1.0;letter-spacing:-0.03em;color:#fff;margin-bottom:1rem;}
+.roi-sub{font-size:1rem;color:#fff;max-width:520px;line-height:1.85;margin-bottom:4rem;}
+.roi-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.roi-card{background:#111;border:1px solid #2a2a2a;border-radius:16px;padding:2.5rem;}
+.roi-row{display:flex;justify-content:space-between;align-items:baseline;padding:1rem 0;border-bottom:1px solid #1e1e1e;font-size:0.9rem;}
+.roi-row:last-of-type{border-bottom:none;}
+.roi-row .rl{color:#fff;}
+.roi-row .rv{color:#fff;font-weight:600;}
+.roi-row.hl .rl{color:#fff;font-weight:600;}
+.roi-row.hl .rv{color:#fff;font-size:1.4rem;font-weight:700;letter-spacing:-0.02em;}
+.roi-note{font-size:0.82rem;color:#999;margin-top:1.5rem;line-height:1.75;font-style:italic;}
+.roi-left{display:flex;flex-direction:column;gap:2rem;}
+.roi-left p{font-size:0.95rem;color:#fff;line-height:1.85;}
+
+.about{background:#e8e8e8;padding:6rem 2.5rem;}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+.about-title{font-size:clamp(2.8rem,6vw,5.5rem);font-weight:600;line-height:1.0;letter-spacing:-0.03em;color:#0d0d0d;margin-bottom:2rem;}
+.about-sub{font-size:1rem;color:#555;line-height:1.85;margin-bottom:2rem;}
+.about-list{list-style:none;display:flex;flex-direction:column;}
+.about-list li{display:flex;align-items:flex-start;gap:1rem;font-size:0.92rem;color:#444;padding:1rem 0;border-bottom:1px solid #ccc;line-height:1.6;}
+.about-list li:last-child{border-bottom:none;}
+.about-list li::before{content:'→';color:#0d0d0d;font-weight:700;flex-shrink:0;}
+.about-big{font-size:9rem;font-weight:600;color:#d4d4d4;line-height:1;letter-spacing:-0.05em;margin-bottom:2rem;}
+.about-loc{font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#aaa;margin-top:1.5rem;}
+
+.contact{background:#0d0d0d;padding:3.5rem 2.5rem;}
+.contact-title{font-size:clamp(1.8rem,4vw,3rem);font-weight:600;line-height:1.1;letter-spacing:-0.02em;color:#fff;margin-bottom:0.75rem;}
+.contact-sub{font-size:0.95rem;color:#fff;max-width:480px;line-height:1.75;margin-bottom:2rem;}
+.contact-inner{display:grid;grid-template-columns:1fr 1.6fr;gap:3rem;align-items:start;}
+.contact-left .cdetail{display:flex;align-items:center;gap:0.75rem;font-size:0.88rem;color:#fff;margin-bottom:0.75rem;}
+.contact-left .cdetail svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:1.5;flex-shrink:0;}
+.motto{font-size:1.1rem;font-weight:600;color:#fff;margin-top:2rem;letter-spacing:-0.02em;line-height:1.3;}
+.sig{font-size:0.75rem;color:#888;margin-top:0.4rem;}
+.cf{display:flex;flex-direction:column;gap:0.6rem;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;}
+.field label{display:block;font-size:0.67rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#888;margin-bottom:0.3rem;}
+.field input,.field textarea,.field select{width:100%;background:#111;border:1px solid #2a2a2a;color:#fff;padding:0.65rem 0.9rem;font-family:'Figtree',sans-serif;font-size:0.88rem;border-radius:8px;outline:none;transition:border-color 0.2s;}
+.field input::placeholder,.field textarea::placeholder{color:#555;}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:#555;}
+.field textarea{resize:vertical;min-height:80px;}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-color:#111;}
+.btn-white{background:#fff;color:#0d0d0d;border:none;padding:0.8rem 1.75rem;font-family:'Figtree',sans-serif;font-size:0.88rem;font-weight:600;cursor:pointer;border-radius:100px;transition:opacity 0.2s;white-space:nowrap;align-self:flex-start;margin-top:0.25rem;}
+.btn-white:hover{opacity:0.85;}
+
+.footer{background:#0a0a0a;padding:1.75rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:1px solid #1a1a1a;}
+.footer-brand{font-size:0.9rem;font-weight:700;color:#fff;text-transform:uppercase;}
+.footer-copy{font-size:0.75rem;color:#fff;}
+</style>
+
+<div class="s">
+
+<nav class="nav">
+  <div class="nav-brand">Ox Media Studio</div>
+  <ul class="nav-links">
+    <li><a href="#">The Method</a></li>
+    <li><a href="#">Who We Help</a></li>
+    <li><a href="#">Results</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-pre">You Don't Need To Increase Your Ad Budget</div>
+  <h1>Stop Paying For Visitors<br>Who Never Become<br>Customers.</h1>
+  <p class="hero-sub">You're paying for every click. But 50–80% of paid ad traffic never converts, because visitors land on a page built for everyone, not for them. Ox Media stops that leak with a single conversion layer page.</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="n">80%</div><div class="l">Of ad clicks lost</div></div>
+    <div class="hstat"><div class="n">$0</div><div class="l">Extra ad spend needed</div></div>
+    <div class="hstat"><div class="n">1</div><div class="l">Page. One action.</div></div>
+  </div>
+</section>
+
+<section class="blk">
+  <div class="blk-stat">
+    <div class="big">80%</div>
+    <div class="big-desc">Research across digital marketing consistently shows that 50–80% of paid advertising traffic fails to convert. If you're spending $5,000/month on ads, you may be losing $3,000–$4,000 worth of clicks every month, before a single lead is converted.</div>
+  </div>
+  <div class="blk-title">Conversion Leakage<br>Is Costing You<br>More Than You Think.</div>
+  <div class="blk-grid">
+    <div class="blk-item"><div class="pn">01</div><h3>Built for Everyone, Converts Nobody</h3><p>Your main website serves brand info, multiple services, menus, and blogs. Paid traffic needs one clear path to act. That mismatch kills conversions before they start.</p></div>
+    <div class="blk-item"><div class="pn">02</div><h3>Visitors Arrive Cold</h3><p>Ad traffic has limited context and is still evaluating trust. Without emotional preparation on arrival, they leave — usually within seconds of landing.</p></div>
+    <div class="blk-item"><div class="pn">03</div><h3>The Ad Promise Breaks</h3><p>Your ad made a specific promise. If the landing page doesn't immediately reinforce it, visitors feel confused. Confusion always leads to leaving.</p></div>
+    <div class="blk-item"><div class="pn">04</div><h3>You Pay for It Twice</h3><p>Every unconverted click is wasted spend. You paid to get them there. When they leave without acting, that money is gone — and you pay again on the next attempt.</p></div>
+  </div>
+</section>
+
+<section class="gray">
+  <div class="gray-title">The Conversion<br>Layer Method™</div>
+  <p class="gray-sub">A purpose-built page that sits between your ad and your website. It prepares visitors emotionally, reinforces your ad's promise, and drives one clear action — no distractions, no menus, no exits.</p>
+  <div class="steps">
+    <div class="step"><div class="sn">Step 01</div><h4>Reinforce the Ad Promise</h4><p>The page immediately matches the ad's language and offer. Visitors feel they arrived in the right place — and stay long enough to act.</p></div>
+    <div class="step"><div class="sn">Step 02</div><h4>Build Emotional Resonance</h4><p>Emotion-first copy amplifies the desire or pain that drove the click. The visitor stays engaged and moves naturally toward action.</p></div>
+    <div class="step"><div class="sn">Step 03</div><h4>Establish Trust Fast</h4><p>Reviews, testimonials, credentials, and guarantees appear before the visitor has a chance to second-guess their decision.</p></div>
+    <div class="step"><div class="sn">Step 04</div><h4>One Clear Call to Action</h4><p>No menus. No distractions. One next step: book an appointment, request a quote, or call your business directly.</p></div>
+  </div>
+</section>
+
+<section class="wht">
+  <div class="wht-title">Businesses Already<br>Running Ads.</div>
+  <div class="niche-grid">
+    <div class="niche-item"><div class="ni-name">Roofing</div><div class="ni-spend">$3k–$15k / mo spend</div><div class="ni-leak">~$1,800–$9,000 / mo leaked</div></div>
+    <div class="niche-item"><div class="ni-name">Med Spas</div><div class="ni-spend">$2k–$10k / mo spend</div><div class="ni-leak">~$1,200–$6,000 / mo leaked</div></div>
+    <div class="niche-item"><div class="ni-name">HVAC</div><div class="ni-spend">$3k–$12k / mo spend</div><div class="ni-leak">~$1,800–$7,200 / mo leaked</div></div>
+    <div class="niche-item"><div class="ni-name">Personal Injury Law</div><div class="ni-spend">$5k–$30k / mo spend</div><div class="ni-leak">~$3,000–$18,000 / mo leaked</div></div>
+    <div class="niche-item"><div class="ni-name">Plastic Surgery</div><div class="ni-spend">$5k–$25k / mo spend</div><div class="ni-leak">~$3,000–$15,000 / mo leaked</div></div>
+    <div class="niche-item"><div class="ni-name">Home Remodeling</div><div class="ni-spend">$3k–$15k / mo spend</div><div class="ni-leak">~$1,800–$9,000 / mo leaked</div></div>
+    <div class="niche-item"><div class="ni-name">Pool Builders</div><div class="ni-spend">$5k–$20k / mo spend</div><div class="ni-leak">~$3,000–$12,000 / mo leaked</div></div>
+    <div class="niche-item"><div class="ni-name">Cosmetic Dentistry</div><div class="ni-spend">$3k–$15k / mo spend</div><div class="ni-leak">~$1,800–$9,000 / mo leaked</div></div>
+    <div class="niche-item"><div class="ni-name">Hair Transplant</div><div class="ni-spend">$5k–$20k / mo spend</div><div class="ni-leak">~$3,000–$12,000 / mo leaked</div></div>
+    <div class="niche-item"><div class="ni-name">Solar</div><div class="ni-spend">$2k–$10k / mo spend</div><div class="ni-leak">~$1,200–$6,000 / mo leaked</div></div>
+    <div class="niche-item"><div class="ni-name">Landscaping</div><div class="ni-spend">$2k–$8k / mo spend</div><div class="ni-leak">~$1,200–$4,800 / mo leaked</div></div>
+    <div class="niche-item"><div class="ni-name">Chiropractic</div><div class="ni-spend">$2k–$10k / mo spend</div><div class="ni-leak">~$1,200–$6,000 / mo leaked</div></div>
+  </div>
+</section>
+
+<section class="roi">
+  <div class="roi-title">Make Your Ads<br>Work Harder<br>For You.</div>
+  <p class="roi-sub">You don't need more ad budget. You need to convert more of the traffic you're already paying for.</p>
+  <div class="roi-inner">
+    <div class="roi-left">
+      <p>If a roofing company is spending $5,000/month on ads and closing 5% of leads, Ox Media increases that conversion percentage to 8–10% — meaning the same budget produces nearly double the booked jobs or sales.</p>
+    </div>
+    <div class="roi-card">
+      <div class="roi-row"><span class="rl">Monthly Ad Spend</span><span class="rv">$5,000/mo</span></div>
+      <div class="roi-row"><span class="rl">Current Conversion Rate</span><span class="rv">5%</span></div>
+      <div class="roi-row"><span class="rl">Average Job Value</span><span class="rv">$15,000</span></div>
+      <div class="roi-row"><span class="rl">Jobs Closed / Month (Now)</span><span class="rv">~3 jobs</span></div>
+      <div class="roi-row"><span class="rl">Rate With Conversion Layer</span><span class="rv">8–10%</span></div>
+      <div class="roi-row hl"><span class="rl">Additional Revenue / Month</span><span class="rv">+$30k–$45k</span></div>
+      <p class="roi-note">At zero additional ad spend. The Conversion Layer Method™ makes every dollar you're already spending work harder.</p>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="about-inner">
+    <div>
+      <div class="about-title">ROI is our<br>#1 Goal.</div>
+      <p class="about-sub">At OxMedia we don't want you increasing your ad budget — we make your existing budget work harder. Every page hand-coded from scratch. One outcome: turning ad clicks into more booked appointments and sales.</p>
+      <ul class="about-list">
+        <li>Every page hand-coded from scratch — no templates, no builders</li>
+        <li>Emotion-first copy matched to your specific ad campaign</li>
+        <li>Proprietary Conversion Layer Method™ — proven, repeatable</li>
+        <li>Campaign analysis and ad-to-page alignment included</li>
+        <li>30-day follow-up review to track results and optimize</li>
+      </ul>
+    </div>
+    <div>
+      <div class="about-big">OX</div>
+      <p style="font-size:0.95rem;color:#555;line-height:1.85;">We do one thing — and we do it better than anyone. Conversion pages for high-ticket service businesses running paid ads.</p>
+      <div class="about-loc">Tampa, Florida — Worldwide</div>
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="contact-title">Every Click You Pay For<br>Should Pay You Back.</div>
+  <p class="contact-sub">You're already spending on ads. The problem isn't the traffic, it's where it lands. Tell us about your funnel and we'll show you exactly where it's costing you.</p>
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="cdetail"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Lonnie@oxmediastudio.com</div>
+      <div class="cdetail"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> oxmediastudio.com</div>
+      <div class="motto">"Stop paying for visitors<br>who never become customers."</div>
+      <div class="sig">— Lonnie Oxendine, Ox Media Studio · Tampa, FL</div>
+    </div>
+    <div class="cf">
+      <div class="frow">
+        <div class="field"><label>Name</label><input type="text" placeholder="Your name"/></div>
+        <div class="field"><label>Email</label><input type="email" placeholder="you@email.com"/></div>
+      </div>
+      <div class="field"><label>Business Name</label><input type="text" placeholder="Your company"/></div>
+      <div class="field"><label>Industry</label>
+        <select>
+          <option value="">Select your niche...</option>
+          <option>Roofing</option><option>Med Spa / Aesthetics</option><option>HVAC</option>
+          <option>Personal Injury Law</option><option>Plastic Surgery</option>
+          <option>Home Remodeling</option><option>Pool Builder</option>
+          <option>Cosmetic Dentistry</option><option>Hair Transplant</option>
+          <option>Solar</option><option>Landscaping</option>
+          <option>Weight Loss Clinic</option><option>Chiropractor</option>
+          <option>Real Estate</option><option>Other</option>
+        </select>
+      </div>
+      <div class="field"><label>Monthly Ad Spend</label>
+        <select>
+          <option value="">Select a range...</option>
+          <option>Under $1,000/mo</option><option>$1,000–$3,000/mo</option>
+          <option>$3,000–$7,500/mo</option><option>$7,500–$15,000/mo</option>
+          <option>$15,000+/mo</option>
+        </select>
+      </div>
+      <div class="field"><label>About Your Funnel</label><textarea placeholder="What ads are you running? Where are you sending traffic? What's not converting?"></textarea></div>
+      <button class="btn-white">→ Request a Free Audit</button>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-brand">Ox Media Studio</div>
+  <div class="footer-copy">© 2026 Ox Media Studio · Tampa, FL · oxmediastudio.com</div>
+</footer>
+
+</div>
