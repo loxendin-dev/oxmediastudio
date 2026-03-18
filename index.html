@@ -25,9 +25,16 @@
 .hero-pre{font-size:0.85rem;font-weight:500;color:#888;margin-bottom:1.5rem;}
 .hero h1{font-size:clamp(2.8rem,7.5vw,6.5rem);font-weight:600;line-height:1.0;color:#0d0d0d;letter-spacing:-0.03em;margin-bottom:2.5rem;max-width:900px;}
 .hero-sub{font-size:1rem;color:#555;line-height:1.85;max-width:520px;margin-bottom:3rem;}
-.hero-stats{display:flex;gap:4rem;flex-wrap:wrap;justify-content:center;padding-top:2.5rem;border-top:1px solid #ccc;width:100%;max-width:700px;}
-.hstat .n{font-size:2rem;font-weight:600;color:#0d0d0d;line-height:1;letter-spacing:-0.03em;}
-.hstat .l{font-size:0.78rem;color:#888;margin-top:0.2rem;}
+.hero-stats{display:flex;gap:4rem;flex-wrap:wrap;justify-content:center;padding-top:2.5rem;border-top:1px solid #ccc;width:100%;max-width:760px;}
+.hstat{text-align:center;}
+.hstat .l{font-size:0.78rem;color:#888;margin-top:0.4rem;}
+
+/* SLOT — clipping window is exactly one digit tall */
+.slot-wrap{display:inline-flex;align-items:center;gap:0;}
+.slot-window{overflow:hidden;height:2.5rem;display:inline-block;vertical-align:middle;}
+.slot-inner{display:flex;flex-direction:column;will-change:transform;}
+.slot-digit{font-size:2rem;font-weight:600;color:#0d0d0d;line-height:2.5rem;height:2.5rem;text-align:center;display:block;}
+.slot-static{font-size:2rem;font-weight:600;color:#0d0d0d;line-height:2.5rem;display:inline-block;vertical-align:middle;}
 
 .blk{background:#0d0d0d;padding:6rem 2.5rem;}
 .blk-title{font-size:clamp(2.8rem,6.5vw,6rem);font-weight:600;line-height:1.0;letter-spacing:-0.03em;color:#fff;margin-bottom:4rem;}
@@ -130,10 +137,37 @@
   <div class="hero-pre fade-up visible">You Don't Need To Increase Your Ad Budget</div>
   <h1 class="fade-up visible delay-1">Stop Paying For Visitors<br>Who Never Become<br>Customers.</h1>
   <p class="hero-sub fade-up visible delay-2">You're paying for every click. But 50–80% of paid ad traffic never converts, because visitors land on a page built for everyone, not for them. Ox Media stops that leak with a single conversion layer page.</p>
+
   <div class="hero-stats fade-up visible delay-3">
-    <div class="hstat"><div class="n">3–5x</div><div class="l">Your revenue with one change</div></div>
-    <div class="hstat"><div class="n" id="stat2" data-target="0" data-prefix="$">$0</div><div class="l">Extra ad spend needed</div></div>
-    <div class="hstat"><div class="n" id="stat3" data-target="1">0</div><div class="l">Adjustment</div></div>
+
+    <!-- 3–5x -->
+    <div class="hstat">
+      <div class="slot-wrap">
+        <div class="slot-window" id="win1"><div class="slot-inner" id="inner1"></div></div>
+        <span class="slot-static">–</span>
+        <div class="slot-window" id="win2"><div class="slot-inner" id="inner2"></div></div>
+        <span class="slot-static">x</span>
+      </div>
+      <div class="l">Your revenue with one change</div>
+    </div>
+
+    <!-- $0 -->
+    <div class="hstat">
+      <div class="slot-wrap">
+        <span class="slot-static">$</span>
+        <div class="slot-window" id="win3"><div class="slot-inner" id="inner3"></div></div>
+      </div>
+      <div class="l">Extra ad spend needed</div>
+    </div>
+
+    <!-- 1 -->
+    <div class="hstat">
+      <div class="slot-wrap">
+        <div class="slot-window" id="win4"><div class="slot-inner" id="inner4"></div></div>
+      </div>
+      <div class="l">Adjustment</div>
+    </div>
+
   </div>
 </section>
 
@@ -202,9 +236,7 @@
   <div class="roi-title fade-up">Make Your Ads<br>Work Harder<br>For You.</div>
   <p class="roi-sub fade-up delay-1">You don't need more ad budget. You need to convert more of the traffic you're already paying for.</p>
   <div class="roi-inner">
-    <div class="roi-left fade-up delay-2">
-      <p>If a roofing company is spending $5,000/month on ads and closing 5% of leads, Ox Media increases that conversion percentage to 8–10% — meaning the same budget produces nearly double the booked jobs or sales.</p>
-    </div>
+    <div class="roi-left fade-up delay-2"><p>If a roofing company is spending $5,000/month on ads and closing 5% of leads, Ox Media increases that conversion percentage to 8–10% — meaning the same budget produces nearly double the booked jobs or sales.</p></div>
     <div class="roi-card fade-up delay-3">
       <div class="roi-row"><span class="rl">Monthly Ad Spend</span><span class="rv">$5,000/mo</span></div>
       <div class="roi-row"><span class="rl">Current Conversion Rate</span><span class="rv">5%</span></div>
@@ -258,36 +290,65 @@
 </div>
 
 <script>
+// Scroll animations
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.12 });
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-function animateCounter(el) {
-  const target = parseInt(el.dataset.target);
-  const prefix = el.dataset.prefix || '';
-  const suffix = el.dataset.suffix || '';
-  if (target === 0) { el.textContent = prefix + '0' + suffix; return; }
-  const steps = 40; const duration = 1400; let step = 0;
-  const timer = setInterval(() => {
-    step++;
-    const current = Math.min(Math.round((target / steps) * step), target);
-    el.textContent = prefix + current + suffix;
-    if (current >= target) clearInterval(timer);
-  }, duration / steps);
+// SLOT MACHINE — scrolls UP, final digit stays visible at bottom of window
+function spinReel(innerId, finalChar, turns, duration, delayMs) {
+  const inner = document.getElementById(innerId);
+  const digitH = 40; // px — matches 2.5rem at 16px base
+
+  // Build strip: random digits on top, final at bottom
+  const chars = [];
+  const pool = '9876543210';
+  for (let i = 0; i < turns; i++) {
+    chars.push(pool[Math.floor(Math.random() * pool.length)]);
+  }
+  chars.push(finalChar); // final always last
+
+  inner.innerHTML = '';
+  chars.forEach(c => {
+    const el = document.createElement('span');
+    el.className = 'slot-digit';
+    el.textContent = c;
+    inner.appendChild(el);
+  });
+
+  const totalH = chars.length * digitH;
+  // Start: show first digit (translateY = 0)
+  // End: show last digit = translateY of -(totalH - digitH)
+  const endY = -(totalH - digitH);
+
+  inner.style.transform = 'translateY(0px)';
+  inner.style.transition = 'none';
+
+  setTimeout(() => {
+    // Force reflow
+    inner.getBoundingClientRect();
+    inner.style.transition = `transform ${duration}ms cubic-bezier(0.22, 0.6, 0.2, 1)`;
+    inner.style.transform = `translateY(${endY}px)`;
+  }, delayMs);
 }
+
+// Trigger when stats section is in view
+const statsEl = document.querySelector('.hero-stats');
+let fired = false;
 
 const statsObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      document.querySelectorAll('.hstat .n[data-target]').forEach(el => {
-        animateCounter(el); el.removeAttribute('data-target');
-      });
+    if (entry.isIntersecting && !fired) {
+      fired = true;
+      spinReel('inner1', '3', 18, 1500, 200);
+      spinReel('inner2', '5', 18, 1500, 350);
+      spinReel('inner3', '0', 16, 1400, 550);
+      spinReel('inner4', '1', 14, 1300, 750);
       statsObserver.disconnect();
     }
   });
-}, { threshold: 0.5 });
+}, { threshold: 0.4 });
 
-const statsEl = document.querySelector('.hero-stats');
 if (statsEl) statsObserver.observe(statsEl);
 </script>
